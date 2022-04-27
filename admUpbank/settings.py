@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c7t%$t_zrk^t7!=4mv9gt%39fbmeh^ow7a(c&!72t2a=iep5t7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.agenciaoner.com.br/upbankprogramation/', 'agenciaoner.com.br/upbankprogramation/']
 
 
 # Application definition
