@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+    <div class="termos"> 
+        <div>
+             <div class="clienteTermos">
+                 <h2>nome  = {{ nome }} </h2>
+                        
+                 <hr> 
+                 <h2 style="color:blue;margin-left:15px;">Produtos:
+                    {{ loas }}
+                    {{ especie }}
+                 </h2>  
+                               
+                    
+              </div>       
+     
+                
+        <div>
+            <h2 class="termoAceiteH2">TERMO DE ACEITE</h2>
+            <h3 style="margin-left:15px;">Estou ciente que foi passado pelo comercial e SUPORTE as informações abaixo:</h3>
+        <form method="POST">    
+                {% csrf_token %}
+                {{ cli.as_p }}
+                </br><input type="checkbox" required>Eu li e concordo com os termos de uso</input>
+
+                <button id=identificado type="submit" class="save btn btn-default">Save</button> 
+        </form>
+    
+    </div>
+
+       
+
+
+
+{% endblock content %}

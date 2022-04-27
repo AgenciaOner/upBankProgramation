@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block content %}
+
+<header style="grid-area: auto; width:100%;height:120px;background:black;">
+    
+    <div>
+        {% load static %}
+        <img  style="padding-left:25px; padding-top:10px;" alt="django" src="{% static 'image/200x70.png'%}" >
+    </div>
+
+</header>
+
+
+<form style = "color:black;" method="POST">
+    
+    {% csrf_token %}
+    <div style="color:#ffcc00"class="containe">
+        <div class="textoPrincipal">
+        <h1>Por  favor  preencha</h1>
+        <h1 class="textoPrincipal02">os dados abaixo:</h1>
+        </div>
+        <div style="margin-left:-300px;"class="box">
+            {{ Cliente|bootstrap}}
+        </div>
+            
+    </div>
+    
+    <h2 class="texto"> É essencial ter a melhor estratégia para seus envios,</h2>
+                </br><h2 class="texto02">Qual proposta irá oferecer para os seus clientes?</h2> 
+    <div class="botaoSelect">
+        
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('loas', '#id_cliente-0-loas_0')">LOAS</button>
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('inss',  '#id_bmgCliente-0-INSS_0')" >SAQUE BMG INSS</button>   
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('siape', '#id_siapeCliente-0-SIAPE_0')">SAQUE BMG SIAPE</button>   
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('refin', '#id_refinCliente-0-REFIN_0')">REFIN ITAÚ</button>   
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('ole', '#id_oleCliente-0-OLÉ_0')">REFIN OLÉ</button> 
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('bari')">PORT BARI</button>   
+    </div>
+
+      
+    <div class="card-todos">
+        <h4 id="loas" class="his" style="color:blue;font-size:16px;">
+            <div class="cards cardGeral" style="width: 16rem; height: 250px;">     
+                {{ loasForm.management_form }}
+                {% for radio in loasForm %}
+                </br>{{ radio }}
+                {% endfor %}
+            </div>   
+        </h4>
+        <h4 class="hi" id="inss" style="color:blue;font-size:16px;">
+            <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
+                <div style="margin-left:30px;">
+                    {{ bmgInssForm.management_form }}
+                    {% for radio in bmgInssForm %}
+                        </br><h2 style="margin-left:-45px;font-size:16px;">{{ radio }}</h2>
+                    {% endfor %}
+                    <div style="margin-left:-40px;"class="form-check">
+                        <input checked type="radio"> Nível Brasil
+                    </br><input checked type="radio"> Saque acima de R$ 1000,00
+                    </br><input checked type="radio"> Várias espécies </input>
+                    </div>
+                </div>
+          
+            </div>   
+        </h4>
+        <!--SIAPE-->
+        <h4 class="hi" id="siape" style="color:blue;font-size:16px;">
+            <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
+                <div style="margin-left:30px;">
+                    {{ siapeForm.management_form }}
+                    {% for radio in siapeForm %}
+                        </br><h2 style="margin-left:-45px;font-size:16px;">{{ radio }}</h2>
+                    {% endfor %}
+                    <div style="margin-left:-40px;"class="form-check">
+                        <input checked type="radio"> Nível Brasil
+                    </br><input checked type="radio"> Saque acima de R$ 1000,00
+                    </br><input checked type="radio"> Várias espécies </input>
+                    </div>
+                </div>
+          
+            </div>   
+        </h4>
+        <!--refin itaú-->
+        <h4 class="hi" id="refin" style="color:blue;font-size:16px;">
+            <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
+                <div style="margin-left:30px;">
+                    {{ refinForm.management_form }}
+                    {% for radio in refinForm %}
+                        </br><h2 style="margin-left:-45px;font-size:16px;">{{ radio }}</h2>
+                    {% endfor %}
+                    <div style="margin-left:-40px;"class="form-check">
+                        <input checked type="radio"> Nível Brasil
+                    </br><input checked type="radio"> Várias Espécies
+                    </br><input checked type="radio"> Várias Idades </input>
+                    </div>
+                </div>
+          
+            </div>   
+        </h4>
+        <!--ole-->
+        <h4 class="hi" id="ole" style="color:blue;font-size:16px;">
+            <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
+                <div style="margin-left:30px;">
+                    {{ oleForm.management_form }}
+                    {% for radio in oleForm %}
+                        </br><h2 style="margin-left:-45px;font-size:16px;">{{ radio }}</h2>
+                    {% endfor %}
+                    <div style="margin-left:-40px;"class="form-check">
+                        <input checked type="radio"> Nível Brasil
+                    </br><input checked type="radio"> Várias Espécies
+                    </br><input checked type="radio"> Várias Idades </input>
+                    </div>
+                </div>
+          
+            </div>   
+        </h4>
+        <h4 class="hi" id="bari" style="color:blue;font-size:16px;">
+            <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
+                <div style="margin-left:30px; margin-top:-10px;">
+                    {{ bariForm.management_form }}
+                    {% for radio in bariForm %}
+                        </br><h2 style="margin-left:-45px;font-size:16px;">{{ radio }}</h2>
+                    {% endfor %}
+                    <div style="margin-left:-40px;"class="form-check">
+                        <input checked type="radio"> Nível Brasil
+                    </br><input checked type="radio"> Várias Espécies
+                    </br><input checked type="radio"> Várias Idades </input>
+                    </br><input checked type="radio"> Troco ao cliente acima R$500,00 </input>
+                    </div>
+                </div>
+          
+            </div>   
+        </h4>
+
+    </div>
+        <div class="pacotesDiv">
+            {{ pacoteForm.management_form  }}
+           <h2 style="font-size:20px;">{{ pacoteForm.as_p }}</h2>
+        </div>
+        
+        <div class="botaoSubmitDiv">
+            <button onclick="verificacaoCampos()" class="submitButton"  id=identificado type="submit">PROSSEGUIR</button> 
+        </div>    
+</form>
+
+<footer class="footer">
+    <div>
+        {% load static %}
+        <img  style="padding-left:25px; padding-top:10px;" alt="django" src="{% static 'image/200x70.png'%}" >
+    </div>
+</footer>
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+

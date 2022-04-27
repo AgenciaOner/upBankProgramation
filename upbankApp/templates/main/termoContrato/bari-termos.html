@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+    <div style="height:980px;" class="termos"> 
+        <div>
+             <div class="clienteTermos">
+                 <h2 style="margin-left:10px; font-size:18px;">nome  = {{ nome }} </h2>
+                        
+                 <hr> 
+                 <h2 style="color:black;margin-left:10px; font-size: 18px;">Produtos:
+                    {{ bari }}, {{ nivelBrasil }}, {{variasespecies}}, {{variasIdades}}, {{trocoCliente}}
+                 </h2>
+                 <h2 style="color:black;margin-left:10px; font-size: 18px;"> Troco acima de R$3000,00:
+                    {{ troco }}
+                 </h2>
+                 <hr> 
+                 <h2 style="color:black;margin-left:10px; font-size: 18px;">Pacote:
+                    {{ pacotes }}
+                 </h2>
+                 <hr> 
+                               
+                    
+              </div>       
+     
+                
+        <div>
+            <h2 class="termoAceiteH2">TERMO DE ACEITE</h2>
+            <h3 style="margin-left:15px;" class="estouCiente">Estou ciente que foi passado pelo comercial e SUPORTE as informações abaixo:</h3>
+        <form method="POST">
+            <div style="margin-left:15px;margin-top:20px;">
+                <input id="ident01" type="checkbox" required>  O envio é fracionado a partir de 250 ou 500 envios por dia.;</input>
+                </br><input id="ident02" type="checkbox" required>  Após a compra o setor tem 24h para te acionar e 24h para finalizar a entrega;</input>
+                </br><input id="ident03" type="checkbox" required>  O WhatsApp pode bloquear seu número, e não nos responsabilizamos por isso;
+                (evite mandar para números que já foram denunciados e chips virgens)</input>
+                </br><input id="ident04" type="checkbox" required>  Não garantimos volume de respostas ou de vendas;</input>
+                </br><input id="ident05" type="checkbox" required>  A quantidade contratada refere-se a um volume de entrada de telefones,
+                e não de saída (entrega);</input>
+                </br><input id="ident06" style="padding-left:5px;"type="checkbox" required>  Não há opção de devolução de pagamento, após o serviço prestado;</input>
+                </br><input id="ident07"type="checkbox" required>  O aparelho precisa ter bateria suficiente e conexão com internet durante os envios;</input>
+                </br><input id="ident08" type="checkbox" required>  Limite de envio por dia é de 500;</input>
+                </br><input id="ident09" type="checkbox" required>  Temos uma tolerância de 15 minutos de atraso. Passando esse prazo, seu horário será remarcado.
+                Caso você tenha imprevistos, nos avise com antecedência;</input>
+            </div>    
+                {% csrf_token %}
+                {{ cli.as_p }}
+                </br><input id="ident10" style="margin-left:15px;font-size:25px;" type="checkbox" required>  Eu li e concordo com os termos de uso</input>
+            <div style="margin-top: 50px;margin-left:75%;">
+                <button onclick="enviar()" class="btn-saveTermos" type="submit">ENVIAR</button> 
+            </div>    
+        </form>
+    
+    </div>
+
+{% endblock content %}

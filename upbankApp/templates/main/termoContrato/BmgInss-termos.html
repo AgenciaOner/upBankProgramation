@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+    <div class="termos"> 
+        <div>
+             <div class="clienteTermos">
+                 <h2 style="margin-left:10px; font-size:18px;">nome  = {{ nome }} </h2>
+                        
+                 <hr> 
+                 <h2 style="color:black;margin-left:10px; font-size: 20px;">Produtos:
+                    {{saqueBmgInss}}, {{ nivelBrasil }}, {{ saqueAcimaMil }}, {{variasespecies}}
+                 </h2>
+                 <hr>  
+                               
+                    
+              </div>       
+     
+                
+        <div>
+            <h2 class="termoAceiteH2">TERMO DE ACEITE</h2>
+            <h3 class="estouCiente">Estou ciente que foi passado pelo comercial e SUPORTE as informações abaixo:</h3>
+        <form method="POST">    
+                {% csrf_token %}
+                {{ cli.as_p }}
+                </br><input style="margin-left:15px;font-size:25px;" type="checkbox" required>Eu li e concordo com os termos de uso</input>
+            <div style="margin-top: 50px;margin-left:75%;">
+                <button onclick="enviar()" class="btn-saveTermos" type="submit">ENVIAR</button> 
+            </div>    
+        </form>
+    
+    </div>
+
+       
+
+
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+    <div style="height:950px;" class="termos"> 
+        <div>
+             <div class="clienteTermos">
+                 <h2 style="margin-left:10px; font-size:18px;">nome  = {{ nome }} </h2>
+                        
+                 <hr> 
+                 <h2 style="color:black;margin-left:10px; font-size: 20px;">Produtos:
+                    {{ refinItau }}, {{ nivelBrasil }}, {{variasespecies}}, {{variasIdades}}
+                 </h2>
+                 <h2 style="color:black;margin-left:10px; font-size: 20px;"> Troco acima de R$1000,00:
+                    {{ troco }}
+                 </h2>
+                 <hr> 
+                 <h2 style="color:black;margin-left:10px; font-size: 20px;">Pacote:
+                    {{ pacotes }}
+                 </h2>
+                 <hr> 
+                               
+                    
+              </div>       
+     
+                
+        <div>
+            <h2 class="termoAceiteH2">TERMO DE ACEITE</h2>
+            <h3 style="margin-left:15px;" class="estouCiente">Estou ciente que foi passado pelo comercial e SUPORTE as informações abaixo:</h3>
+        <form method="POST">
+            <div style="margin-left:15px;">
+                <input type="checkbox" required>  O envio é fracionado a partir de 250 ou 500 envios por dia.;</input>
+                </br><input id="ident" type="checkbox" required>  Após a compra o setor tem 24h para te acionar e 24h para finalizar a entrega;</input>
+                </br><input type="checkbox" required>  O WhatsApp pode bloquear seu número, e não nos responsabilizamos por isso;
+                (evite mandar para números que já foram denunciados e chips virgens)</input>
+                </br><input type="checkbox" required>  Não garantimos volume de respostas ou de vendas;</input>
+                </br><input type="checkbox" required>  A quantidade contratada refere-se a um volume de entrada de telefones,
+                e não de saída (entrega);</input>
+                </br><input style="padding-left:5px;"type="checkbox" required>  Não há opção de devolução de pagamento, após o serviço prestado;</input>
+                </br><input type="checkbox" required>  O aparelho precisa ter bateria suficiente e conexão com internet durante os envios;</input>
+                </br><input type="checkbox" required>  Limite de envio por dia é de 500;</input>
+                </br><input type="checkbox" required>  Temos uma tolerância de 15 minutos de atraso. Passando esse prazo, seu horário será remarcado.
+                Caso você tenha imprevistos, nos avise com antecedência;</input>
+            </div>    
+                {% csrf_token %}
+                {{ cli.as_p }}
+                </br><input style="margin-left:15px;font-size:25px;" type="checkbox" required>  Eu li e concordo com os termos de uso</input>
+            <div style="margin-top: 50px;margin-left:75%;">
+                <button onclick="enviar()" class="btn-saveTermos" type="submit">ENVIAR</button> 
+            </div>    
+        </form>
+    
+    </div>
+
+{% endblock content %}
