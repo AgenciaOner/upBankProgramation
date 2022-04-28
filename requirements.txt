@@ -1,4 +1,4 @@
 Django==3.2.13
 django-anymail==8.5
 django-bootstrap-form==3.4
-Python 3.6.8
+Python 3.7
