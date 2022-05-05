@@ -1,18 +1,14 @@
 from email.mime import base
 from lib2to3.pytree import Base
-from sys import api_version
-from tkinter.font import BOLD
-from xmlrpc.client import boolean
-from django.http import HttpResponse, HttpResponseRedirect
 
 from upbankApp.models import BariModel, ClienteModel, BmgInssModel, LoasModel, BmgSiapeModel, OleModel, PacotesModel, RefinModel
 from upbankApp.forms import BariForm, ClienteForm, LoasForm, BmgInssForm, BmgSiapeForm, ClienteVerificacao, OleForm, PacotesForm, RefinForm
-from django.shortcuts import redirect, render
+from django.shortcuts import  render
 from django.forms.models import inlineformset_factory
 from django.core.mail import EmailMultiAlternatives
 import  pdfkit
-from django.urls import reverse
 import os
+import _tkinter
 
 from django.core.mail import EmailMessage
 
