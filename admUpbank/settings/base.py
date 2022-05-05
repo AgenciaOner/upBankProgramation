@@ -122,8 +122,8 @@ EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@meusite.com'
 SERVER_EMAIL= 'DEFAULT_FROM_EMAIL'
 ANYMAIL = {
-    'MAILGUN_API_KEY': '2ab1874f9f8cf8149a239ed63015bea0-162d1f80-94140a7c',
-    'MAILGUN_SENDER_DOMAIN': 'sandbox3946b6f000cf4b21afb7ebf0e7cd8521.mailgun.org',
+    'MAILGUN_API_KEY': '9f542106c37e1a161583ecd05920e2df-53ce4923-af0fb898',
+    'MAILGUN_SENDER_DOMAIN': 'sandboxae773491b2dd4486a55f7631444bf921.mailgun.org',
 }
 
 STATIC_ROOT =  BASE_DIR / 'staticfiles'

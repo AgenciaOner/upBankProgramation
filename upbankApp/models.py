@@ -1,3 +1,5 @@
+from django.db import models
+
 from random import choice
 from django.db import models
 
@@ -10,6 +12,8 @@ marcas = [
 class ClienteModel(models.Model):
     id   = models.AutoField(primary_key = True)
     nome_da_Empresa = models.CharField(max_length=128)
+    Email_da_Empresa = models.EmailField(max_length=128)
+    telefone_da_Empresa = models.BigIntegerField()
 
     
 
@@ -54,7 +58,7 @@ class BmgSiapeModel(models.Model):
 class RefinModel(models.Model):
     RefinSiape = models.ForeignKey(ClienteModel, on_delete = models.CASCADE, related_name = "refinCliente")   
     REFIN = models.CharField(max_length=128, choices= selecionar)
-    Troco_Acima_1000 = models.DecimalField(default= 0, max_digits = 100000, decimal_places= 2)
+    Troco_Acima_1000 = models.FloatField(default= 0)
     
     
     def __str__(self):
@@ -62,8 +66,8 @@ class RefinModel(models.Model):
 
 class OleModel(models.Model):
     RefinOle = models.ForeignKey(ClienteModel, on_delete = models.CASCADE, related_name = "oleCliente")   
-    OLÉ = models.CharField(max_length=128, choices= selecionar)
-    Troco_Acima_1000 = models.DecimalField(default= 0, max_digits = 100000, decimal_places= 2)
+    OLE = models.CharField(max_length=128, choices= selecionar)
+    Troco_Acima_1000 = models.FloatField(default= 0)
     
     
     def __str__(self):
@@ -72,7 +76,7 @@ class OleModel(models.Model):
 class BariModel(models.Model):
     RefinOle = models.ForeignKey(ClienteModel, on_delete = models.CASCADE, related_name = "bariCliente")   
     BARI = models.CharField(max_length=128, choices= selecionar)
-    Venda_valor_acima_de_3000 = models.DecimalField(default= 0, max_digits = 100000, decimal_places= 2)
+    Venda_valor_acima_de_3000 = models.FloatField(default= 0)
     
     
     def __str__(self):
@@ -96,4 +100,3 @@ class Marca(models.Model):
      nome = models.CharField(max_length=100, choices=marcas)
      def __str__(self):
         return self.nome
-

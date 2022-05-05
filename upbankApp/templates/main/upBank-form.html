@@ -6,7 +6,7 @@
     
     <div>
         {% load static %}
-        <img  style="padding-left:25px; padding-top:10px;" alt="django" src="{% static 'image/200x70.png'%}" >
+        <img  style="padding-left:25px; padding-top:20px; width:250px; "alt="django" src="{% static 'image/200x70.png'%}" >
     </div>
 
 </header>
@@ -16,11 +16,10 @@
     
     {% csrf_token %}
     <div style="color:#ffcc00"class="containe">
-        <div class="textoPrincipal">
-        <h1>Por  favor  preencha</h1>
-        <h1 class="textoPrincipal02">os dados abaixo:</h1>
+        <div style="margin-top: -300px;" class="textoPrincipal">
+        <h1>Por  favor  preencha os dados abaixo:</h1>
         </div>
-        <div style="margin-left:-300px;"class="box">
+        <div style="margin-left:-500px; font-size:18px"class="box">
             {{ Cliente|bootstrap}}
         </div>
             
@@ -30,17 +29,17 @@
                 </br><h2 class="texto02">Qual proposta irá oferecer para os seus clientes?</h2> 
     <div class="botaoSelect">
         
-        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('loas', '#id_cliente-0-loas_0')">LOAS</button>
-        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('inss',  '#id_bmgCliente-0-INSS_0')" >SAQUE BMG INSS</button>   
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('loasBrasil', '#id_cliente-0-loas_0')">LOAS</button>
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('inss',  '#id_bmgCliente-0-INSS_0')", >SAQUE BMG INSS</button>   
         <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('siape', '#id_siapeCliente-0-SIAPE_0')">SAQUE BMG SIAPE</button>   
         <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('refin', '#id_refinCliente-0-REFIN_0')">REFIN ITAÚ</button>   
         <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('ole', '#id_oleCliente-0-OLÉ_0')">REFIN OLÉ</button> 
-        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('bari')">PORT BARI</button>   
+        <button  style="margin-right: 40px;" class="btn-todos" type="button" onclick="mostrar('bari', '')">PORT BARI</button>   
     </div>
 
       
     <div class="card-todos">
-        <h4 id="loas" class="his" style="color:blue;font-size:16px;">
+        <h4 id="loasBrasil" class="his" style="color:black;font-size:16px;">
             <div class="cards cardGeral" style="width: 16rem; height: 250px;">     
                 {{ loasForm.management_form }}
                 {% for radio in loasForm %}
@@ -48,7 +47,15 @@
                 {% endfor %}
             </div>   
         </h4>
-        <h4 class="hi" id="inss" style="color:blue;font-size:16px;">
+        <h4 id="loasCidade" class="his" style="color:blue;font-size:16px;">
+            <div class="cards cardGeral" style="width: 16rem; height: 250px;">     
+                {{ loasForm.management_form }}
+                {% for radio in loasForm %}
+                </br>{{ radio }}
+                {% endfor %}
+            </div>   
+        </h4>
+        <h4 class="hi" id="inss" style="color:black;font-size:16px;">
             <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
                 <div style="margin-left:30px;">
                     {{ bmgInssForm.management_form }}
@@ -65,7 +72,7 @@
             </div>   
         </h4>
         <!--SIAPE-->
-        <h4 class="hi" id="siape" style="color:blue;font-size:16px;">
+        <h4 class="hi" id="siape" style="color:black;font-size:16px;">
             <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
                 <div style="margin-left:30px;">
                     {{ siapeForm.management_form }}
@@ -82,7 +89,7 @@
             </div>   
         </h4>
         <!--refin itaú-->
-        <h4 class="hi" id="refin" style="color:blue;font-size:16px;">
+        <h4 class="hi" id="refin" style="color:black;font-size:16px;">
             <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
                 <div style="margin-left:30px;">
                     {{ refinForm.management_form }}
@@ -99,7 +106,7 @@
             </div>   
         </h4>
         <!--ole-->
-        <h4 class="hi" id="ole" style="color:blue;font-size:16px;">
+        <h4 class="hi" id="ole" style="color:black;font-size:16px;">
             <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
                 <div style="margin-left:30px;">
                     {{ oleForm.management_form }}
@@ -115,7 +122,7 @@
           
             </div>   
         </h4>
-        <h4 class="hi" id="bari" style="color:blue;font-size:16px;">
+        <h4 class="hi" id="bari" style="color:black;font-size:16px;">
             <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
                 <div style="margin-left:30px; margin-top:-10px;">
                     {{ bariForm.management_form }}
@@ -147,14 +154,12 @@
 <footer class="footer">
     <div>
         {% load static %}
-        <img  style="padding-left:25px; padding-top:10px;" alt="django" src="{% static 'image/200x70.png'%}" >
+        <img  style="padding-left:25px; padding-top:25px; width:250px;" alt="django" src="{% static 'image/200x70.png'%}" >
     </div>
 </footer>
 
 
 {% endblock content %}
-
-
 
 
 
