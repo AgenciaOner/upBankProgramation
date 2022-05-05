@@ -3,6 +3,7 @@ from django.db import models
 from random import choice
 from django.db import models
 from tkinter import CASCADE
+
 marcas = [
     ("1","green"),
     ("2","teste"),
