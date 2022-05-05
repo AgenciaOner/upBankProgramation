@@ -8,7 +8,7 @@ from django.forms.models import inlineformset_factory
 from django.core.mail import EmailMultiAlternatives
 import  pdfkit
 import os
-import _tkinter
+
 
 from django.core.mail import EmailMessage
 
