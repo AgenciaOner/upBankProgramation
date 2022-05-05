@@ -2,7 +2,7 @@ from django.db import models
 
 from random import choice
 from django.db import models
-from tkinter import CASCADE
+from django.db.models.deletion import CASCADE
 
 marcas = [
     ("1","green"),
