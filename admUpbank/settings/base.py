@@ -123,10 +123,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@meusite.com'
 SERVER_EMAIL= 'DEFAULT_FROM_EMAIL'
-ANYMAIL = {
-    'MAILGUN_API_KEY': '9f542106c37e1a161583ecd05920e2df-53ce4923-af0fb898',
-    'MAILGUN_SENDER_DOMAIN': 'sandboxae773491b2dd4486a55f7631444bf921.mailgun.org',
-}
+
 
 STATIC_ROOT =  BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
