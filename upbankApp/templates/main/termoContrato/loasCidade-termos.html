@@ -8,14 +8,13 @@
                  <h2 style="margin-left:10px; font-size:18px;">email  = {{ email }} </h2>
                  <h2 style="margin-left:10px; font-size:18px;">telefone  = {{ telefone }} </h2>
 
+                
                         
                  <hr> 
                  <h2 style="color:black;margin-left:10px; font-size: 18px;">Produtos:
-                    {{ refimOle }}, {{ nivelBrasil }}, {{variasespecies}}, {{variasIdades}}
+                    {{LOAS}}, {{ cidade }}, {{estado}}, {{ especie }}
                  </h2>
-                 <h2 style="color:black;margin-left:10px; font-size: 18px;"> Troco acima de R$1000,00:
-                    {{ troco }}
-                 </h2>
+                 
                  <hr> 
                  <h2 style="color:black;margin-left:10px; font-size: 18px;">Pacote:
                     {{ pacotes }}
@@ -40,7 +39,7 @@
                 </br><input id="ident06" style="padding-left:5px;"type="checkbox" required checked>  Após a entrega da base, se tratando de um serviço digital entregue via planilha, é impossível para o Upbank como empresa aceitar devoluções e/ou pedidos para refazer filtros mesmo que o contratante solicite. </input>
                 </br><input id="ident07"type="checkbox" required checked> Este termo estabelece um acordo pré-compra em que ambas as partes se comprometem com o das condições estabelecidas antes da entrega do serviço. </input>
                
-            </div>      
+            </div>    
                 {% csrf_token %}
                 {{ cli.as_p }}
                 </br><input id="ident10" style="margin-left:15px;font-size:25px;" type="checkbox" required checked>  Eu li e concordo com os termos de uso</input>

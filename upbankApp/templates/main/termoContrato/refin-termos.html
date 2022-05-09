@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
     
-    <div style="height:950px;" class="termos"> 
+    <div style="height:1100px;" class="termos"> 
         <div>
              <div class="clienteTermos">
                  <h2 style="margin-left:10px; font-size:18px;">nome  = {{ nome }} </h2>
+                 <h2 style="margin-left:10px; font-size:18px;">email  = {{ email }} </h2>
+                 <h2 style="margin-left:10px; font-size:18px;">telefone  = {{ telefone }} </h2>
+
                         
                  <hr> 
-                 <h2 style="color:black;margin-left:10px; font-size: 20px;">Produtos:
+                 <h2 style="color:black;margin-left:10px; font-size: 18px;">Produtos:
                     {{ refinItau }}, {{ nivelBrasil }}, {{variasespecies}}, {{variasIdades}}
                  </h2>
-                 <h2 style="color:black;margin-left:10px; font-size: 20px;"> Troco acima de R$1000,00:
+                 <h2 style="color:black;margin-left:10px; font-size: 18px;"> Troco acima de R$1000,00:
                     {{ troco }}
                  </h2>
                  <hr> 
-                 <h2 style="color:black;margin-left:10px; font-size: 20px;">Pacote:
+                 <h2 style="color:black;margin-left:10px; font-size: 18px;">Pacote:
                     {{ pacotes }}
                  </h2>
                  <hr> 
@@ -27,25 +30,22 @@
             <h2 class="termoAceiteH2">TERMO DE ACEITE</h2>
             <h3 style="margin-left:15px;" class="estouCiente">Estou ciente que foi passado pelo comercial e SUPORTE as informações abaixo:</h3>
         <form method="POST">
-            <div style="margin-left:15px;">
-                <input type="checkbox" required>  O envio é fracionado a partir de 250 ou 500 envios por dia.;</input>
-                </br><input id="ident" type="checkbox" required>  Após a compra o setor tem 24h para te acionar e 24h para finalizar a entrega;</input>
-                </br><input type="checkbox" required>  O WhatsApp pode bloquear seu número, e não nos responsabilizamos por isso;
-                (evite mandar para números que já foram denunciados e chips virgens)</input>
-                </br><input type="checkbox" required>  Não garantimos volume de respostas ou de vendas;</input>
-                </br><input type="checkbox" required>  A quantidade contratada refere-se a um volume de entrada de telefones,
-                e não de saída (entrega);</input>
-                </br><input style="padding-left:5px;"type="checkbox" required>  Não há opção de devolução de pagamento, após o serviço prestado;</input>
-                </br><input type="checkbox" required>  O aparelho precisa ter bateria suficiente e conexão com internet durante os envios;</input>
-                </br><input type="checkbox" required>  Limite de envio por dia é de 500;</input>
-                </br><input type="checkbox" required>  Temos uma tolerância de 15 minutos de atraso. Passando esse prazo, seu horário será remarcado.
-                Caso você tenha imprevistos, nos avise com antecedência;</input>
+            <div style="margin-left:15px;margin-top:20px;">
+                <input id="ident01" type="checkbox" required checked>  O Upbank entregará a quantidade de Leads higienizados referente ao pacote adquirido pelo cliente. Todos os leads deverão ter obrigatoriamente um ou mais contatos do tipo Celular.</input>
+                </br><input id="ident02" type="checkbox" required checked> Da higienização: o Upbank se responsabiliza em entregar leads com telefones higienizados e com assertividade superior aos contatos originais obtidos via Sistema,
+                 entretanto não garantimos uma porcentagem de assertividade da base. </input>
+                </br><input id="ident03" type="checkbox" required checked> É parte do Objetivo da equipe do Upbank entregar clientes com possibilidade real de venda, entretanto se tratando de um mercado veloz e volátil existe a possibilidade de algum dos Leads não ter a possibilidade de contrair empréstimos. </input>
+                </br><input id="ident04" type="checkbox" required checked> O Upbank fornece clientes aptos para a venda, porém não garantimos o interesse claro e óbvio do lead em contrair o empréstimo. </input>
+                </br><input id="ident05" type="checkbox" required checked> Alterações de dos leads poderão ser feitas ANTES e somente ANTES do serviço ser concluído e entregue ao contratante.</input>
+                </br><input id="ident06" style="padding-left:5px;"type="checkbox" required checked>  Após a entrega da base, se tratando de um serviço digital entregue via planilha, é impossível para o Upbank como empresa aceitar devoluções e/ou pedidos para refazer filtros mesmo que o contratante solicite. </input>
+                </br><input id="ident07"type="checkbox" required checked> Este termo estabelece um acordo pré-compra em que ambas as partes se comprometem com o das condições estabelecidas antes da entrega do serviço. </input>
+               
             </div>    
                 {% csrf_token %}
                 {{ cli.as_p }}
-                </br><input style="margin-left:15px;font-size:25px;" type="checkbox" required>  Eu li e concordo com os termos de uso</input>
+                </br><input id="ident10" style="margin-left:15px;font-size:25px;" type="checkbox" required checked>  Eu li e concordo com os termos de uso</input>
             <div style="margin-top: 50px;margin-left:75%;">
-                <button onclick="enviar()" class="btn-saveTermos" type="submit">ENVIAR</button> 
+                <button onclick="enviar()" class="btn-saveTermos" type="submit" checked>ENVIAR</button> 
             </div>    
         </form>
     

@@ -6,7 +6,7 @@
     
     <div>
         {% load static %}
-        <img  style="padding-left:25px; padding-top:20px; width:250px; "alt="django" src="{% static 'image/200x70.png'%}" >
+        <img  style="padding-left:25px; padding-top:25px; width:250px; "alt="django" src="{% static 'image/logo02.png'%}" >
     </div>
 
 </header>
@@ -41,20 +41,32 @@
     <div class="card-todos">
         <h4 id="loasBrasil" class="his" style="color:black;font-size:16px;">
             <div class="cards cardGeral" style="width: 16rem; height: 250px;">     
-                {{ loasForm.management_form }}
-                {% for radio in loasForm %}
-                </br>{{ radio }}
-                {% endfor %}
+                <div style="margin-top:-25px;">
+                    {{ loasForm.management_form }}
+                    {% for radio in loasForm %}
+                </br><h5 onclick="loasSelected('#id_clienteCidade-0-Cidade_0')"  style="font-size:16px;">{{ radio }}</h5>
+
+                    {% endfor %}
+                </div>
             </div>   
         </h4>
-        <h4 id="loasCidade" class="his" style="color:blue;font-size:16px;">
-            <div class="cards cardGeral" style="width: 16rem; height: 250px;">     
-                {{ loasForm.management_form }}
-                {% for radio in loasForm %}
-                </br>{{ radio }}
-                {% endfor %}
+        
+        <h4 class="his" id="loasCidade" style="color:black;font-size:16px;">
+            <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
+                <div style="margin-left:30px; margin-top:-25px;">
+       
+                    {{ loasCidadeFormView.management_form }}
+                    {% for radio in loasCidadeFormView %}
+                        </br><h5 onclick="loasSelected('#id_cliente-0-Brasil_0')"  style="margin-left:-45px;font-size:16px;">{{ radio }}</h5>
+                    {% endfor %}
+                    
+                </div>
+          
             </div>   
         </h4>
+        
+        
+        
         <h4 class="hi" id="inss" style="color:black;font-size:16px;">
             <div  class="cards cardGeral" style="width: 16rem;height: 250px;">     
                 <div style="margin-left:30px;">
@@ -127,7 +139,7 @@
                 <div style="margin-left:30px; margin-top:-10px;">
                     {{ bariForm.management_form }}
                     {% for radio in bariForm %}
-                        </br><h2 style="margin-left:-45px;font-size:16px;">{{ radio }}</h2>
+                        </br><h2 onclick="teste()" style="margin-left:-45px;font-size:16px;">{{ radio }}</h2>
                     {% endfor %}
                     <div style="margin-left:-40px;"class="form-check">
                         <input checked type="radio"> Nível Brasil
@@ -139,11 +151,17 @@
           
             </div>   
         </h4>
+        <script>
+            function teste(id){
+              
+                alert("Vedna valor acima  de  3 mil!")
+            }
+        </script>
 
     </div>
         <div class="pacotesDiv">
             {{ pacoteForm.management_form  }}
-           <h2 style="font-size:20px;">{{ pacoteForm.as_p }}</h2>
+           <h2 style="font-size:20px;">{{ pacoteForm.as_table }}</h2>
         </div>
         
         <div class="botaoSubmitDiv">
@@ -154,7 +172,7 @@
 <footer class="footer">
     <div>
         {% load static %}
-        <img  style="padding-left:25px; padding-top:25px; width:250px;" alt="django" src="{% static 'image/200x70.png'%}" >
+        <img  style="padding-left:25px; padding-top:25px; width:250px;" alt="django" src="{% static 'image/logo02.png'%}" >
     </div>
 </footer>
 

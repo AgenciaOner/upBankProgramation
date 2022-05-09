@@ -27,15 +27,61 @@ loas = [('nível brasil','Nível Brasil'),
 especie=[('87 e 88','87 e 88'),
          ('só 87','só 87'),
          ('só 88','só 88')]         
+
+selecionar =[('selecionado','Clique aqui')] 
+
+
+    
 class LoasModel(models.Model):
+
     id = models.AutoField(primary_key=True)
     cliente = models.ForeignKey(ClienteModel, on_delete=models.CASCADE, related_name="cliente")
-    loas = models.CharField(max_length=100, choices=loas) 
+    Brasil  = models.CharField(max_length=128, choices = selecionar)
     espécie  = models.CharField(max_length=100, choices = especie)
 
     def __str__(self):
         return self.loas 
-selecionar =[('selecionado','Clique aqui')]    
+estado= [('Acre (AC)',   'Acre (AC)'),
+('Alagoas (AL)' , 'Alagoas (AL)'), 
+('Amapá (AP)' ,  'Amapá (AP)'),
+('Amazonas (AM)', 'Amazonas (AM)'),  
+('Bahia (BA)', 'Bahia (BA)') ,
+('Ceará (CE)' ,  'Ceará (CE)'), 
+('Distrito Federal (DF)',  'Distrito Federal (DF)'),
+('Espírito Santo (ES)' , 'Espírito Santo (ES)'),
+('Goiás (GO)', 'Goiás (GO)'),  
+('Maranhão (MA)', 'Maranhão (MA)'), 
+('Mato Grosso (MT)', 'Mato Grosso (MT)'),
+( 'Mato Grosso do Sul (MS)' , 'Mato Grosso do Sul (MS)'), 
+('Minas Gerais (MG)',  'Minas Gerais (MG)'), 
+('Pará (PA)', 'Pará (PA)'), 
+( 'Paraíba (PB)', 'Paraíba (PB)'),
+('Paraná (PR)',  'Paraná (PR)'), 
+('Pernambuco (PE)', 'Pernambuco (PE)'),
+('Piauí (PI)' , 'Piauí (PI)'), 
+('Rio de Janeiro (RJ)', 'Rio de Janeiro (RJ)'), 
+('Rio Grande do Norte (RN)', 'Rio Grande do Norte (RN)'),
+('Rio Grande do Sul (RS)', 'Rio Grande do Sul (RS)'),
+('Rondônia (RO)', 'Rondônia (RO)'), 
+('Roraima (RR)', 'Roraima (RR)' ),
+('Santa Catarina (SC)' ,  'Santa Catarina (SC)'), 
+('São Paulo (SP)',  'São Paulo (SP)'),
+('Sergipe (SE)',  'Sergipe (SE)'),
+('Tocantins (TO)', 'Tocantins (TO)')]
+ 
+class LoasCidadeModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    cliente = models.ForeignKey(ClienteModel, on_delete=models.CASCADE, related_name="clienteCidade")
+    Cidade  = models.CharField(max_length=128, choices = selecionar)
+    estado = models.CharField(max_length=100, choices=estado)
+    cidade = models.CharField(max_length=100) 
+    espécie  = models.CharField(max_length=100, choices = especie)
+
+    def __str__(self):
+        return self.loas 
+    
+    
+   
 
 class BmgInssModel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -84,12 +130,13 @@ class BariModel(models.Model):
         return "{}".format(self.BARI)                          
     
     
-pacotes  = [('100-ENVIOS->R$ 59,90', '100-ENVIOS  -> R$ 59,90'),
-            ('250-ENVIOS - R$ 99,90','250-ENVIOS - R$ 99,90'),
-            ('250-ENVIOS - R$ 199,90','250-ENVIOS - R$ 199,90'),
-            ('250-ENVIOS - R$ 299,90','250-ENVIOS - R$ 299,90'),
-            ('250-ENVIOS - R$ 580,00','250-ENVIOS - R$ 580,00'),
-            ('250-ENVIOS -  R$ 840,00','250-ENVIOS - R$ 840,00')]
+pacotes  = [('100-CONTRATOS-R$ 70,00', '100-CONTRATOS->R$70,00'),
+            ('200-CONTRATOS - R$ 120,00','200-CONTRATOS->R$120,00'),
+            ('500-CONTRATOS - R$ 290,00','500-CONTRATOS->R$290,00'),
+            ('750-CONTRATOS - R$ 420,00','750-CONTRATOS->R$420,00'),
+            ('1000-CONTRATOS - R$ 520,00','1000-CONTRATOS->R$520,00'),
+            ('1500-CONTRATOS -  R$ 740,00','1500-CONTRATOS->R$740,00'),
+            ('3000-CONTRATOS -  R$ 1390,00','3000-CONTRATOS->R$1390,00')]
 
 class PacotesModel(models.Model):
     pacotesCliente = models.ForeignKey(ClienteModel, on_delete= models.CASCADE, related_name= "pacotesCliente")   

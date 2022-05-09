@@ -207,6 +207,18 @@
   width:200px;
   height: 25px;
 }
+#id_clienteCidade-0-estado{
+  width:210px;
+  height: 25px;
+  /*margin-top: 40px;*/
+  /*padding-top:-18px;*/
+}
+
+#id_clienteCidade-0-cidade{
+  width:210px;
+  height: 25px;
+ 
+}
 
 
 

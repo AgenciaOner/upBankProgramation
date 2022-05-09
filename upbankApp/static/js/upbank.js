@@ -80,13 +80,11 @@ function enviar() {
     ids5 = document.querySelector("#ident05")
     ids6 = document.querySelector("#ident06")
     ids7 = document.querySelector("#ident07")
-    ids8 = document.querySelector("#ident08")
-    ids9 = document.querySelector("#ident09")
+   
     ids10 = document.querySelector("#ident10")
     ids11 = document.querySelector("#id_selecione_0")
     ids12 = document.querySelector("#id_selecione_1")
-    if (ids1.checked  == false || ids2.checked  == false || ids3.checked  == false || ids4.checked  == false || ids5.checked  == false || ids6.checked  == false ||  ids7.checked  == false ||  ids8.checked  == false ||
-        ids9.checked  == false) {
+    if (ids1.checked  == false || ids2.checked  == false || ids3.checked  == false || ids4.checked  == false || ids5.checked  == false || ids6.checked  == false ||  ids7.checked  == false) {
         alert("Por favor preencha todos os campos! ")
     }else if(ids11.checked  == false && ids12.checked  == false){
         alert("Faltam campos para preencher! ")
@@ -100,8 +98,8 @@ function enviar() {
 }
 function verificacaoCampos() {
     
-    loasBrasil = document.querySelector("#id_cliente-0-loas_0")
-    loasCidade = document.querySelector("#id_cliente-0-loas_1")
+    loasBrasil = document.querySelector("#id_cliente-0-Brasil_0")
+    loasCidade = document.querySelector("#id_clienteCidade-0-Cidade_0")
     bmg = document.querySelector("#id_bmgCliente-0-INSS_0")
     siape  = document.querySelector("#id_siapeCliente-0-SIAPE_0")
     refin = document.querySelector("#id_refinCliente-0-REFIN_0")
@@ -121,6 +119,11 @@ function verificacaoCampos() {
     
    
 }   
+
+function loasSelected(id){
+    teste01 = document.querySelector(id)
+    this.teste01.checked = false
+}
 
    
 
