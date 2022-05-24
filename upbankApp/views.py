@@ -1,15 +1,31 @@
-
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-
 from upbankApp.models import BariModel, ClienteModel, BmgInssModel, LoasModel, LoasCidadeModel, BmgSiapeModel, OleModel, PacotesModel, RefinModel
 from upbankApp.forms import BariForm, ClienteForm, LoasForm, LoasCidadeForm, BmgInssForm, BmgSiapeForm, ClienteVerificacao, OleForm, PacotesForm, RefinForm
 from django.shortcuts import  render
 from django.forms.models import inlineformset_factory
-from django.core.mail import EmailMultiAlternatives
-import  pdfkit
-import os
+import time
 from django.urls import reverse
 from django.core.mail import EmailMessage
+from pathlib import Path
+
+#fpath = Path('/usr/bin/wkhtmltopdf').absolute()
+
+def MandaEmail02(produto, cliente):
+    
+    
+    nome = cliente[0]
+    email = cliente[1]
+    telefone = cliente[2]
+    produtos = produto[0:]
+    
+    email = EmailMessage(
+        'Programação UpBank! '+ nome+', telefone: '+ telefone, produtos, email , ['upbankvendas@gmail.com'])
+    email.attach_file('contrato.png')
+    email.send()
+
+globalDadosCliente = []
+globalArrayProdutos = []
 
 def MandaEmail03(pdf, produto, cliente):
     
@@ -24,8 +40,10 @@ def MandaEmail03(pdf, produto, cliente):
 globalDadosCliente = []
 globalArrayProdutos = []
 
+
 def bari(request):
             
+    time.sleep(1)
     nome = globalDadosCliente[0]
     email = globalDadosCliente[1]
     telefone  = globalDadosCliente[2]
@@ -37,11 +55,17 @@ def bari(request):
     trocoquinze = globalArrayProdutos[5]
     pacotes  = globalArrayProdutos[6]
         
-    cli = ClienteVerificacao(request.POST)
-    if cli.is_valid():
-        pdfkit.from_url('http://127.0.0.1:8000/bari', 'contrato.pdf')
-        MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
-        os.remove('contrato.pdf')
+    cli = ClienteVerificacao()
+    if request.method == "POST":
+        cli = ClienteVerificacao(request.POST)
+        #pdfkit.from_url('http://127.0.0.1:8000/bari', 'contrato.pdf')
+        #MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
+        time.sleep(0.5)
+        MandaEmail02(globalArrayProdutos, globalDadosCliente)
+        globalArrayProdutos.clear()       
+        globalDadosCliente.clear()
+
+        #os.remove('contrato.pdf')
         return redirect('UpBank')
     
     dicionario = {'nome':nome, 'email':email, 'telefone':telefone,  'cli':cli, 'bari':bari, 'troco':troco,
@@ -61,11 +85,15 @@ def ole(request):
     idades = globalArrayProdutos[4]
     pacotes  = globalArrayProdutos[5]
  
-    cli = ClienteVerificacao(request.POST)
-    if cli.is_valid():
-        pdfkit.from_url('http://127.0.0.1:8000/ole', 'contrato.pdf')
-        MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
-        os.remove('contrato.pdf')
+    cli = ClienteVerificacao()
+    if request.method == "POST":
+        cli = ClienteVerificacao(request.POST)
+        #pdfkit.from_url('http://127.0.0.1:8000/ole', 'contrato.pdf')
+        #MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
+        MandaEmail02(globalArrayProdutos, globalDadosCliente)
+        #os.remove('contrato.pdf')
+        globalArrayProdutos.clear()       
+        globalDadosCliente.clear()
         return redirect('UpBank')
     
     dicionario =  {'nome':nome, 'email':email, 'telefone':telefone, 'cli':cli, 'refimOle':refinOle, 'troco':troco,
@@ -85,11 +113,12 @@ def refin(request):
     idades = globalArrayProdutos[4]
     pacotes  = globalArrayProdutos[5]
         
-    cli = ClienteVerificacao(request.POST)
-    if cli.is_valid():
-        pdfkit.from_url('http://127.0.0.1:8000/refin', 'contrato.pdf')
-        MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
-        os.remove('contrato.pdf')
+    cli = ClienteVerificacao()
+    if request.method == "POST":
+        cli = ClienteVerificacao(request.POST)
+        MandaEmail02(globalArrayProdutos, globalDadosCliente)
+        globalArrayProdutos.clear()       
+        globalDadosCliente.clear()
         return redirect('UpBank')
     
     dicionario =  {'nome':nome, 'email':email, 'telefone':telefone, 'cli':cli, 'refinItau':refinItau, 'troco':troco,
@@ -110,11 +139,12 @@ def siape(request):
     pacotes = globalArrayProdutos[4]
     
     
-    cli = ClienteVerificacao(request.POST)
-    if cli.is_valid():
-        pdfkit.from_url('http://127.0.0.1:8000/siape', 'contrato.pdf')
-        MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
-        os.remove('contrato.pdf')
+    cli = ClienteVerificacao()
+    if request.method == "POST":
+        cli = ClienteVerificacao(request.POST)
+        MandaEmail02(globalArrayProdutos, globalDadosCliente)
+        globalArrayProdutos.clear()       
+        globalDadosCliente.clear()
         return redirect('UpBank')
     
     dicionario = {'nome':nome, 'email':email, 'telefone':telefone,  'siape': saqueSiape, 
@@ -133,11 +163,12 @@ def bmg(request):
     especie = globalArrayProdutos[3]
     pacotes = globalArrayProdutos[4]
     
-    cli = ClienteVerificacao(request.POST)
-    if cli.is_valid():
-        pdfkit.from_url('http://127.0.0.1:8000/bmg', 'contrato.pdf')
-        MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
-        os.remove('contrato.pdf')
+    cli = ClienteVerificacao()
+    if request.method == "POST":
+        cli = ClienteVerificacao(request.POST)
+        MandaEmail02(globalArrayProdutos, globalDadosCliente)
+        globalArrayProdutos.clear()       
+        globalDadosCliente.clear()
         return redirect('UpBank')
     
     dicionario = {'nome':nome, 'email':email, 'telefone':telefone, 'saqueBmgInss': saque,
@@ -157,11 +188,12 @@ def loasCidade(request):
     especie = globalArrayProdutos[3]
     pacotes = globalArrayProdutos[4]
      
-    cli = ClienteVerificacao(request.POST)
-    if cli.is_valid():
-        pdfkit.from_url('http://127.0.0.1:8000/loasCidade', 'contrato.pdf')
-        MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
-        os.remove('contrato.pdf')
+    cli = ClienteVerificacao()
+    if request.method == "POST":
+        cli = ClienteVerificacao(request.POST)
+        MandaEmail02(globalArrayProdutos, globalDadosCliente)
+        globalArrayProdutos.clear()       
+        globalDadosCliente.clear()
         return redirect('UpBank')
     dicionario = {'nome':nome, 'email':email, 'telefone':telefone, 'cli':cli, 'LOAS':loasCidade,
             'cidade': cidade, 'estado':estado, 'especie': especie , 'pacotes':pacotes}
@@ -178,11 +210,12 @@ def loasBrasil(request):
     especie = globalArrayProdutos[1]
     pacotes = globalArrayProdutos[2]
     
-    cli = ClienteVerificacao(request.POST)
-    if cli.is_valid():
-        pdfkit.from_url('http://127.0.0.1:8000/loasBrasil', 'contrato.pdf')
-        MandaEmail03('contrato.pdf', globalArrayProdutos, globalDadosCliente)
-        os.remove('contrato.pdf')
+    cli = ClienteVerificacao()
+    if request.method == "POST":
+        cli = ClienteVerificacao(request.POST)
+        MandaEmail02(globalArrayProdutos, globalDadosCliente)
+        globalArrayProdutos.clear()       
+        globalDadosCliente.clear()
         return redirect('UpBank')
     dicionario = {'nome':nome, 'email':email, 'telefone':telefone, 'cli':cli, 'LOAS':loas,
     'especie': especie , 'pacotes':pacotes}
@@ -233,8 +266,21 @@ def UpBank(request):
         'bariForm':bariFormView,
         'pacoteForm':pacotesFormView
     }
+   
+    
+    #MANDAR EMAIL
+    cli = ClienteVerificacao(request.POST)
     
     if request.method == "POST":
+        
+        if cli.is_valid():
+            MandaEmail02(globalArrayProdutos, globalDadosCliente)
+            globalArrayProdutos.clear()       
+            globalDadosCliente.clear()
+            #return redirect(reverse("UpBank"))
+            return render(request, 'main/upBank-form.html', context)  
+        
+        
         #Dados cliente
         formDadosCliente = ClienteForm(request.POST)
         
@@ -243,15 +289,7 @@ def UpBank(request):
         pacotesFormView = form_pacotes_factory(request.POST)
         if pacotesFormView.is_valid():
             pacotes = pacotesFormView.cleaned_data.pop().get('pacotes')
-        
-        #MANDAR EMAIL
-        cli = ClienteVerificacao(request.POST)
-        
-        if cli.is_valid():
-           
-            return render(request, 'main/upBank-form.html', context)    
-        
-        
+               
         #BARI
         form_bari_factory = inlineformset_factory(ClienteModel, BariModel, form = BariForm, extra=1 , can_delete = False)
         bariFormView = form_bari_factory(request.POST)
@@ -271,7 +309,7 @@ def UpBank(request):
         refinFormView = form_refin_factory(request.POST)
         if refinFormView.is_valid():
             refin = refinFormView.cleaned_data.pop().get('REFIN')
-            troco =  refinFormView.cleaned_data.pop().get('Troco_Acima_1000') 
+            trocoItau =  refinFormView.cleaned_data.pop().get('Troco_Acima_1000') 
             
         
         #SIAPE
@@ -290,7 +328,7 @@ def UpBank(request):
         #LOAS CIDADE
         form_loasCidade_factory = inlineformset_factory(ClienteModel, LoasCidadeModel, form= LoasCidadeForm, extra=1, can_delete=False)
         loasCidadeFormView = form_loasCidade_factory(request.POST)
-        boleo = loasCidadeFormView.is_valid()
+       
         
         if loasCidadeFormView.is_valid():
             cidadeCaptura = loasCidadeFormView.cleaned_data.pop().get('Cidade')
@@ -310,10 +348,10 @@ def UpBank(request):
             
         globalArrayProdutos.clear()       
         globalDadosCliente.clear()
-        
+        time.sleep(0.5)
         #BARI OK
         if bariFormView.is_valid() and formDadosCliente.is_valid() and bari != None and pacotes != None:
-
+          
             globalArrayProdutos.clear()       
             globalDadosCliente.clear()
             nomeCliente  = formDadosCliente.data.get("nome_da_Empresa")
@@ -329,7 +367,13 @@ def UpBank(request):
             globalArrayProdutos.append('Várias Idades')
             globalArrayProdutos.append('Troco ao cliente acima R$ 500,00')
             globalArrayProdutos.append(pacotes)
-            return redirect(reverse('bari'))
+            time.sleep(0.2)
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'cli':cli, 'bari':'Bari', 'troco':trocoBari,
+            'nivelBrasil':'Nivel Brasil', 'variasespecies':'Várias Espécies', 'variasIdades': 'Várias Idades', 'trocoCliente': 'Troco ao cliente acima R$ 500,00', 'pacotes':pacotes}
+        
+            return render(request, 'main/termoContrato/bari-termos.html', dicionario)
+            #return HttpResponseRedirect(reverse('bari'))
+            #return redirect(reverse('bari'))
                        
          
         #OLE OK
@@ -350,8 +394,10 @@ def UpBank(request):
             globalArrayProdutos.append('Várias Espécies')
             globalArrayProdutos.append('Várias Idades')
             globalArrayProdutos.append(pacotes)
-            return redirect(reverse('ole'))
-         
+            dicionario =  {'nome':nomeCliente, 'email':email, 'telefone':telefone, 'cli':cli, 'refimOle':'Refin Olé', 'troco':trocoOle,
+            'nivelBrasil':'Nível Brasil', 'variasespecies':'Várias Espécies', 'variasIdades': 'Várias Idades','pacotes':pacotes}
+            return render(request, 'main/termoContrato/ole-termos.html', dicionario)
+             
             
         
         #REFIN OK
@@ -367,12 +413,16 @@ def UpBank(request):
             globalDadosCliente.append(email)
             globalDadosCliente.append(telefone)
             globalArrayProdutos.append('Refin Itaú')
-            globalArrayProdutos.append(troco)
+            globalArrayProdutos.append(trocoItau)
             globalArrayProdutos.append('Nível Brasil')
             globalArrayProdutos.append('Várias Espécies')
             globalArrayProdutos.append('Várias Idades')
             globalArrayProdutos.append(pacotes)
-            return redirect(reverse('refin'))           
+            dicionario =  {'nome':nomeCliente, 'email':email, 'telefone':telefone, 'cli':cli, 'refinItau':'Refin Itaú', 'troco':trocoItau,
+            'nivelBrasil': 'Nível Brasil', 'variasespecies':'Várias espécies', 'variasIdades': 'Várias Idades','pacotes':pacotes} 
+
+            return render(request, 'main/termoContrato/refin-termos.html', dicionario)
+        
            
         
         #SIAPE 
@@ -392,8 +442,11 @@ def UpBank(request):
             globalArrayProdutos.append('Saque Acima de R$ 1000,00')
             globalArrayProdutos.append('Várias espécies')
             globalArrayProdutos.append(pacotes)
-            
-            return redirect(reverse('siape'))
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'siape': 'Saque Siape', 
+            'nivelBrasil':'Nivel Brasil', 'saqueAcimaMil': 'Saque Acima de mil', 'variasespecies': 'Várias Espécies', 'pacotes':pacotes, 'cli':cli }
+    
+            return render(request, 'main/termoContrato/siape-termos.html', dicionario)
+
            
         #INSS    
         elif bmgInssFormView.is_valid() and formDadosCliente.is_valid() and bmg != None and pacotes!=None:
@@ -412,7 +465,14 @@ def UpBank(request):
             globalArrayProdutos.append('Saque Acima de R$ 1000,00')
             globalArrayProdutos.append('Várias espécies')
             globalArrayProdutos.append(pacotes)
-            return redirect(reverse('bmg'))
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone, 'saqueBmgInss': 'Saque Bmg Inss',
+            'nivelBrasil':'Nível Brasil', 'saqueAcimaMil':'Saque acima de mil', 'variasespecies':'Várias Espécies', 'pacotes':pacotes, 'cli':cli}
+       
+            return render(request, 'main/termoContrato/BmgInss-termos.html', dicionario)  
+            
+            
+            #return redirect(reverse('bmg'))
+            #return HttpResponseRedirect(reverse('bmg'))
             #return redirect(reverse("bmg"))
             #return render(request, 'main/termoContrato/BmgInss-termos.html', dicionario)
             #return HttpResponseRedirect(reverse("bmg", kwargs = dicionario))
@@ -438,11 +498,12 @@ def UpBank(request):
             globalArrayProdutos.append(cidade)
             globalArrayProdutos.append(estado)
             globalArrayProdutos.append(especieCidade)
-            print('especie 3', globalArrayProdutos[3])
-
             globalArrayProdutos.append(pacotes)
             
-            return redirect(reverse('loasCidade'))
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone, 'cli':cli, 'LOAS':'Loas Cidade',
+            'cidade': cidade, 'estado':estado, 'especie': especieCidade , 'pacotes':pacotes}
+    
+            return render(request, 'main/termoContrato/loasCidade-termos.html', dicionario) 
         
         #LOAS BRASIL
         elif loasFormView.is_valid() and formDadosCliente.is_valid() and loas != None and pacotes!=None:
@@ -458,15 +519,13 @@ def UpBank(request):
             globalDadosCliente.append(email)
             globalDadosCliente.append(telefone)
             globalArrayProdutos.append('Loas Brasil')
-            
             globalArrayProdutos.append(especie)
             globalArrayProdutos.append(pacotes)
-            
-            return redirect(reverse('loasBrasil'))
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone, 'cli':cli, 'LOAS':'Loas Brasil',
+            'especie': especie , 'pacotes':pacotes}
+    
+            return render(request, 'main/termoContrato/loasBrasil-termos.html', dicionario)      
             
             
        
-    
-    
-    
     return render(request, 'main/upBank-form.html', context  )
