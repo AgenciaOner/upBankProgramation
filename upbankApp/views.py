@@ -150,7 +150,7 @@ def UpBank(request):
         form_bmgInss_factory = inlineformset_factory(ClienteModel,BmgInssModel, form = BmgInssForm, extra=1, can_delete = False)
         bmgInssFormView = form_bmgInss_factory(request.POST)
         if bmgInssFormView.is_valid():
-            bmg = bmgInssFormView.cleaned_data.pop().get('INSS')
+            inss = bmgInssFormView.cleaned_data.pop().get('INSS')
         
         #LOAS CIDADE
         form_loasCidade_factory = inlineformset_factory(ClienteModel, LoasCidadeModel, form= LoasCidadeForm, extra=1, can_delete=False)
@@ -175,9 +175,48 @@ def UpBank(request):
             
         globalArrayProdutos.clear()       
         globalDadosCliente.clear()
-        time.sleep(0.5)
+                
+        #DAYCOVAL
+        if daycovalView.is_valid() and formDadosCliente.is_valid() and  daycoval != None and pacotes!=None:
+              
+            
+            nomeCliente  = formDadosCliente.data.get("nome_da_Empresa")
+            email = formDadosCliente.data.get("Email_da_Empresa")
+            telefone  =  formDadosCliente.data.get("telefone_da_Empresa")
+
+            globalDadosCliente.append(nomeCliente)
+            globalDadosCliente.append(email)
+            globalDadosCliente.append(telefone)
+            globalArrayProdutos.append('Refin Daycoval')
+            globalArrayProdutos.append('Nível Brasil')
+            globalArrayProdutos.append('Saque Acima de R$ 1000,00')
+            globalArrayProdutos.append('Várias espécies')
+            globalArrayProdutos.append(pacotes)
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'cli':cli, 'pacotes':pacotes}
+        
+            return render(request, 'main/termoContrato/daycoval-termos.html', dicionario) 
+        
+        elif refinBmgView.is_valid() and formDadosCliente.is_valid() and bmg != None and pacotes!=None:
+              
+            
+            nomeCliente  = formDadosCliente.data.get("nome_da_Empresa")
+            email = formDadosCliente.data.get("Email_da_Empresa")
+            telefone  =  formDadosCliente.data.get("telefone_da_Empresa")
+
+            globalDadosCliente.append(nomeCliente)
+            globalDadosCliente.append(email)
+            globalDadosCliente.append(telefone)
+            globalArrayProdutos.append('Refin Bmg')
+            globalArrayProdutos.append('Nível Brasil')
+            globalArrayProdutos.append('Saque Acima de R$ 1000,00')
+            globalArrayProdutos.append('Várias espécies')
+            globalArrayProdutos.append(pacotes)
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'cli':cli, 'pacotes':pacotes}
+        
+            return render(request, 'main/termoContrato/refinBmg-termos.html', dicionario) 
+        
         #BARI OK
-        if bariFormView.is_valid() and formDadosCliente.is_valid() and bari != None and pacotes != None:
+        elif bariFormView.is_valid() and formDadosCliente.is_valid() and bari != None and pacotes != None:
           
             globalArrayProdutos.clear()       
             globalDadosCliente.clear()
@@ -202,46 +241,6 @@ def UpBank(request):
             #return HttpResponseRedirect(reverse('bari'))
             #return redirect(reverse('bari'))
         
-        
-        elif refinBmgView.is_valid() and formDadosCliente.is_valid() and bmg != None and pacotes!=None:
-              
-            
-            nomeCliente  = formDadosCliente.data.get("nome_da_Empresa")
-            email = formDadosCliente.data.get("Email_da_Empresa")
-            telefone  =  formDadosCliente.data.get("telefone_da_Empresa")
-
-            globalDadosCliente.append(nomeCliente)
-            globalDadosCliente.append(email)
-            globalDadosCliente.append(telefone)
-            globalArrayProdutos.append('Refin Bmg')
-            globalArrayProdutos.append('Nível Brasil')
-            globalArrayProdutos.append('Saque Acima de R$ 1000,00')
-            globalArrayProdutos.append('Várias espécies')
-            globalArrayProdutos.append(pacotes)
-            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'cli':cli, 'pacotes':pacotes}
-        
-            return render(request, 'main/termoContrato/refinBmg-termos.html', dicionario) 
-        
-        #DAYCOVAL
-        elif daycovalView.is_valid() and formDadosCliente.is_valid() and  daycoval != None and pacotes!=None:
-              
-            
-            nomeCliente  = formDadosCliente.data.get("nome_da_Empresa")
-            email = formDadosCliente.data.get("Email_da_Empresa")
-            telefone  =  formDadosCliente.data.get("telefone_da_Empresa")
-
-            globalDadosCliente.append(nomeCliente)
-            globalDadosCliente.append(email)
-            globalDadosCliente.append(telefone)
-            globalArrayProdutos.append('Refin Daycoval')
-            globalArrayProdutos.append('Nível Brasil')
-            globalArrayProdutos.append('Saque Acima de R$ 1000,00')
-            globalArrayProdutos.append('Várias espécies')
-            globalArrayProdutos.append(pacotes)
-            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'cli':cli, 'pacotes':pacotes}
-        
-            return render(request, 'main/termoContrato/daycoval-termos.html', dicionario) 
-         
         #OLE OK
         elif oleFormView.is_valid() and formDadosCliente.is_valid() and ole != None and pacotes != None:
            
@@ -315,7 +314,7 @@ def UpBank(request):
 
            
         #INSS    
-        elif bmgInssFormView.is_valid() and formDadosCliente.is_valid() and bmg != None and pacotes!=None:
+        elif bmgInssFormView.is_valid() and formDadosCliente.is_valid() and inss != None and pacotes!=None:
               
             globalDadosCliente.clear()
             globalArrayProdutos.clear()
