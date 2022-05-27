@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-from upbankApp.models import BariModel, ClienteModel, BmgInssModel, LoasModel, LoasCidadeModel, BmgSiapeModel, OleModel, PacotesModel, RefinModel
-from upbankApp.forms import BariForm, ClienteForm, LoasForm, LoasCidadeForm, BmgInssForm, BmgSiapeForm, ClienteVerificacao, OleForm, PacotesForm, RefinForm
+from upbankApp.models import BariModel, ClienteModel, BmgInssModel, LoasModel, LoasCidadeModel, BmgSiapeModel, OleModel, PacotesModel, RefinModel, RefinBmgModel, RefinDaycovalModel 
+from upbankApp.forms import BariForm, ClienteForm, LoasForm, LoasCidadeForm, BmgInssForm, BmgSiapeForm, ClienteVerificacao, OleForm, PacotesForm, RefinForm, RefinBmgForm, RefinDaycovalForm
 from django.shortcuts import  render
 from django.forms.models import inlineformset_factory
 import time
@@ -57,6 +57,14 @@ def UpBank(request):
     form_loas_factory = inlineformset_factory(ClienteModel, LoasModel, form= LoasForm, extra=1, can_delete=False)
     loasFormView = form_loas_factory()
     
+    #REFINBMG
+    form_refinBmg_factory = inlineformset_factory(ClienteModel, RefinBmgModel, form= RefinBmgForm , extra=1, can_delete=False)
+    refinBmgView = form_refinBmg_factory()
+    
+    #DAYCOVAL
+    form_daycoval_factory = inlineformset_factory(ClienteModel, RefinDaycovalModel, form= RefinDaycovalForm , extra=1, can_delete=False)
+    daycovalView = form_daycoval_factory()
+    
     form_pacotes_factory = inlineformset_factory(ClienteModel, PacotesModel, form= PacotesForm, extra=1, can_delete=False)
     pacotesFormView = form_pacotes_factory()  
     
@@ -67,6 +75,8 @@ def UpBank(request):
         'bmgInssForm':bmgInssFormView,
         'siapeForm':siapeFormView,
         'refinForm':refinFormView,
+        'refinBmg':refinBmgView,
+        'refinDaycoval':daycovalView,
         'oleForm':oleFormView,
         'bariForm':bariFormView,
         'pacoteForm':pacotesFormView
@@ -101,6 +111,18 @@ def UpBank(request):
         if bariFormView.is_valid():
             bari = bariFormView.cleaned_data.pop().get('BARI')
             trocoBari = bariFormView.cleaned_data.pop().get('Venda_valor_acima_de_3000')
+            
+        #REFIN BMG
+        form_refinBmg_factory = inlineformset_factory(ClienteModel, RefinBmgModel, form= RefinBmgForm , extra=1, can_delete=False)
+        refinBmgView = form_refinBmg_factory(request.POST)
+        if refinBmgView.is_valid():
+            bmg = refinBmgView.cleaned_data.pop().get('BMG')
+        
+        #DAYCOVAL
+        form_daycoval_factory = inlineformset_factory(ClienteModel, RefinDaycovalModel, form= RefinDaycovalForm , extra=1, can_delete=False)
+        daycovalView = form_daycoval_factory(request.POST)
+        if daycovalView.is_valid():
+            daycoval = daycovalView.cleaned_data.pop().get('DAYCOVAL')    
         
         #OLE
         form_ole_factory = inlineformset_factory(ClienteModel, OleModel, form = OleForm, extra=1 , can_delete = False)
@@ -179,7 +201,46 @@ def UpBank(request):
             return render(request, 'main/termoContrato/bari-termos.html', dicionario)
             #return HttpResponseRedirect(reverse('bari'))
             #return redirect(reverse('bari'))
-                       
+        
+        
+        elif refinBmgView.is_valid() and formDadosCliente.is_valid() and bmg != None and pacotes!=None:
+              
+            
+            nomeCliente  = formDadosCliente.data.get("nome_da_Empresa")
+            email = formDadosCliente.data.get("Email_da_Empresa")
+            telefone  =  formDadosCliente.data.get("telefone_da_Empresa")
+
+            globalDadosCliente.append(nomeCliente)
+            globalDadosCliente.append(email)
+            globalDadosCliente.append(telefone)
+            globalArrayProdutos.append('Refin Bmg')
+            globalArrayProdutos.append('Nível Brasil')
+            globalArrayProdutos.append('Saque Acima de R$ 1000,00')
+            globalArrayProdutos.append('Várias espécies')
+            globalArrayProdutos.append(pacotes)
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'cli':cli, 'pacotes':pacotes}
+        
+            return render(request, 'main/termoContrato/refinBmg-termos.html', dicionario) 
+        
+        #DAYCOVAL
+        elif daycovalView.is_valid() and formDadosCliente.is_valid() and  daycoval != None and pacotes!=None:
+              
+            
+            nomeCliente  = formDadosCliente.data.get("nome_da_Empresa")
+            email = formDadosCliente.data.get("Email_da_Empresa")
+            telefone  =  formDadosCliente.data.get("telefone_da_Empresa")
+
+            globalDadosCliente.append(nomeCliente)
+            globalDadosCliente.append(email)
+            globalDadosCliente.append(telefone)
+            globalArrayProdutos.append('Refin Bmg')
+            globalArrayProdutos.append('Nível Brasil')
+            globalArrayProdutos.append('Saque Acima de R$ 1000,00')
+            globalArrayProdutos.append('Várias espécies')
+            globalArrayProdutos.append(pacotes)
+            dicionario = {'nome':nomeCliente, 'email':email, 'telefone':telefone,  'cli':cli, 'pacotes':pacotes}
+        
+            return render(request, 'main/termoContrato/daycoval-termos.html', dicionario) 
          
         #OLE OK
         elif oleFormView.is_valid() and formDadosCliente.is_valid() and ole != None and pacotes != None:
