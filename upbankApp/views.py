@@ -233,7 +233,7 @@ def UpBank(request):
             globalDadosCliente.append(nomeCliente)
             globalDadosCliente.append(email)
             globalDadosCliente.append(telefone)
-            globalArrayProdutos.append('Refin Bmg')
+            globalArrayProdutos.append('Refin Daycoval')
             globalArrayProdutos.append('Nível Brasil')
             globalArrayProdutos.append('Saque Acima de R$ 1000,00')
             globalArrayProdutos.append('Várias espécies')
